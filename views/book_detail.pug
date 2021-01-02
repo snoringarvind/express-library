@@ -1,0 +1,36 @@
+extends layout
+block content
+  h1 #[strong Title:] #{book.title}
+  p #[strong Author:]
+    a(href=book.author.url) #{book.author.name}
+  p #[strong Summary:] #{book.summary}
+  p #[strong ISBN:] #{book.isbn}
+  p #[strong Genre] :
+    each val in book.genre
+      a(href=val.url) #{val.name},
+    else 
+      p No Genres
+  
+  h3 Copies
+  each val in bookinstance
+    hr
+    if val.status=='Available'
+      p.text-success #{val.status}
+    else if val.status == 'Maintenance'
+      p.text-danger #{val.status}
+    else
+      p.text-warning #{val.status}
+    if val.status!='Available'
+      p #[strong Due Back:] #{val.due_back_formatted}
+    p #[strong Imprint]: #{val.imprint}
+    p #[strong Id:] 
+      a(href=val.url) #{val._id}
+  else
+    p No Copies of this book.
+  hr
+  p
+    a(href=book.url+'/delete')
+      button.btn.btn-primary(type='button') Delete book
+  p
+    a(href=book.url+'/update')
+      button.btn.btn-primary(type='button') Update book

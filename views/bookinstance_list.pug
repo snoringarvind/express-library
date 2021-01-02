@@ -1,0 +1,17 @@
+extends layout
+block content
+  h1=title
+  ul
+    each bookinstance in bookinstance_list
+      li
+        a(href=bookinstance.url) #{bookinstance.book.title} : #{bookinstance.imprint} -
+        if bookinstance.status=='Available' 
+          //- dot notation is a new feature you can do "div(class='xv')" too
+          span.text-success  #{bookinstance.status}
+        else if bookinstance.status=='Maintenance'
+          span.text-danger  #{bookinstance.status}
+        else
+          span.text-warning  #{bookinstance.status}
+        if bookinstance.status!='Available'
+          span  (Due: #{bookinstance.due_back_formatted})
+        

@@ -1,0 +1,14 @@
+extends layout
+block content
+  h1 #{title}
+  if book_bookinstances.length>0
+    p Before attempting to delete this book, delete these bookinstances first.
+    for bookinstance in book_bookinstances
+      p bookinstance id : 
+        a(href=bookinstance.url) #{bookinstance._id}
+  else
+    p Are you sure you want to delete '#{book.title}' book?
+    form(action='' method='POST')
+      div.form-group
+        input#bookid.form-control(type='hidden' name='bookid' value=book._id)
+      button.btn.btn-primary(type='submit') Delete
