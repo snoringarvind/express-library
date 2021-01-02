@@ -18,7 +18,7 @@ app.use(helmet());
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  process.env.DB_Connection,
+  process.env.MONGODB_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
